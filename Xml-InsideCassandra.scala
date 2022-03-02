@@ -11,7 +11,7 @@ import com.databricks.spark.xml.functions.from_xml
 import com.databricks.spark.xml.schema_of_xml
 import spark.implicits._
 
-val df = spark.read.cassandraFormat("bookss", "demo").load()
+val df = spark.read.cassandraFormat("books", "demo").load()
 val payloadSchema = schema_of_xml(df.select("description").as[String])
 val parsed = df.withColumn("parsed", from_xml($"description", payloadSchema))
 
